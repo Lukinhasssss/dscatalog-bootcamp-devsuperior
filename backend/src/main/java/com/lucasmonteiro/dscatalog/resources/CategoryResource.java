@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.lucasmonteiro.dscatalog.entities.Category;
+import com.lucasmonteiro.dscatalog.dto.CategoryDTO;
 import com.lucasmonteiro.dscatalog.services.CategoryService;
 
 @RestController // Serve para definir que a classe será um controlador REST
@@ -19,8 +19,8 @@ public class CategoryResource {
 	private CategoryService service;
 	
 	@GetMapping
-	public ResponseEntity<List<Category>> findAll() { // ResponseEntity -> É um objeto do Spring que vai encapsular uma responsta HTTP
-		List<Category> categories = service.findAll();
+	public ResponseEntity<List<CategoryDTO>> findAll() { // ResponseEntity -> É um objeto do Spring que vai encapsular uma resposta HTTP
+		List<CategoryDTO> categories = service.findAll();
 		return ResponseEntity.ok().body(categories);
 	}
 
