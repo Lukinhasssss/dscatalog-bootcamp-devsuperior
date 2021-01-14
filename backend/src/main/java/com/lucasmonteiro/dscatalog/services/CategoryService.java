@@ -34,4 +34,17 @@ public class CategoryService {
 		return new CategoryDTO(category);
 	}
 
+	@Transactional
+	public CategoryDTO insert(CategoryDTO categoryDTO) {
+		// Convertendo o dto recebido como parâmetro para um objeto do tipo Category que é a minha entidade
+		Category category = new Category();
+		category.setName(categoryDTO.getName());
+		
+		// Salvando a operação
+		category = repository.save(category);
+		
+		// Retornando a entidade category convertida novamente para um CategoryDTO
+		return new CategoryDTO(category);
+	}
+
 }
