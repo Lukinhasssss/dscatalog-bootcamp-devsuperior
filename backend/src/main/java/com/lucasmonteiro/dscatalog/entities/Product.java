@@ -39,7 +39,7 @@ public class Product implements Serializable {
 		joinColumns = @JoinColumn(name = "product_id"), // @JoinColumns vai estabelecer qual vai ser a chave estrangeira relacionada a classe onde eu estou
 		inverseJoinColumns = @JoinColumn(name = "category_id") // A chave estrangeira que faz o outro lado da associação muitos para muitos
 	)
-	Set<Category> categories = new HashSet<>(); // Para garantir que um produto não tenha mais de uma categoria repetida
+	private Set<Category> categories = new HashSet<>(); // Para garantir que um produto não tenha mais de uma categoria repetida
 	
 	public Product() {}
 
