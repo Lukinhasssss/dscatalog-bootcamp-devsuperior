@@ -7,12 +7,15 @@ import java.util.stream.Collectors;
 import javax.persistence.EntityNotFoundException;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.lucasmonteiro.dscatalog.dto.CategoryDTO;
 import com.lucasmonteiro.dscatalog.entities.Category;
 import com.lucasmonteiro.dscatalog.repositories.CategoryRepository;
+import com.lucasmonteiro.dscatalog.services.exceptions.DatabaseException;
 import com.lucasmonteiro.dscatalog.services.exceptions.ResourceNotFoundException;
 
 @Service // Essa anotation registra a classe como um componente que vai participar do sistema de injeção de dependência automatizado do Spring
@@ -59,6 +62,18 @@ public class CategoryService {
 		}
 		catch (EntityNotFoundException e) {
 			throw new ResourceNotFoundException("Id " + id + " not found");
+		}
+	}
+	
+	public void delete(Long id) {
+		try {
+			repository.deleteById(id);
+		}
+		catch (EmptyResultDataAccessException e) { // Excessão que acontece caso eu tente deletar um id que não existe
+			throw new ResourceNotFoundException("Id " + id + " not found");
+		}
+		catch (DataIntegrityViolationException e) { // Para capturar uma possível excessão de integridade em caso de tentar deletar uma coisa que não se pode deletar
+			throw new DatabaseException("Integrity violation");
 		}
 	}
 
