@@ -12,8 +12,11 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.lucasmonteiro.dscatalog.dto.CategoryDTO;
 import com.lucasmonteiro.dscatalog.dto.ProductDTO;
+import com.lucasmonteiro.dscatalog.entities.Category;
 import com.lucasmonteiro.dscatalog.entities.Product;
+import com.lucasmonteiro.dscatalog.repositories.CategoryRepository;
 import com.lucasmonteiro.dscatalog.repositories.ProductRepository;
 import com.lucasmonteiro.dscatalog.services.exceptions.DatabaseException;
 import com.lucasmonteiro.dscatalog.services.exceptions.ResourceNotFoundException;
@@ -23,6 +26,9 @@ public class ProductService {
 	
 	@Autowired
 	private ProductRepository repository;
+	
+	@Autowired
+	private CategoryRepository categoryRepository;
 	
 	@Transactional(readOnly = true)
 	public Page<ProductDTO> findAllPaged(PageRequest pageRequest) {
@@ -40,7 +46,7 @@ public class ProductService {
 	@Transactional
 	public ProductDTO insert(ProductDTO productDTO) {
 		Product product = new Product();
-		// product.setName(productDTO.getName());
+		copyDtoToEntity(productDTO, product);
 		product = repository.save(product);
 		return new ProductDTO(product);
 	}
@@ -49,7 +55,7 @@ public class ProductService {
 	public ProductDTO update(Long id, ProductDTO productDTO) {
 		try {
 			Product product = repository.getOne(id);
-			// product.setName(productDTO.getName());
+			copyDtoToEntity(productDTO, product);
 			product = repository.save(product);
 			return new ProductDTO(product);
 		}
@@ -67,6 +73,21 @@ public class ProductService {
 		}
 		catch (DataIntegrityViolationException e) {
 			throw new DatabaseException("Integrity violation");
+		}
+	}
+	
+	private void copyDtoToEntity(ProductDTO productDTO, Product product) { // Método que copia os dados do productDTO para o product
+		product.setName(productDTO.getName());
+		product.setPrice(productDTO.getPrice());
+		product.setDescription(productDTO.getDescription());
+		product.setImgUrl(productDTO.getImgUrl());
+		product.setDate(productDTO.getDate());
+		
+		product.getCategories().clear();
+		
+		for(CategoryDTO categoryDTO : productDTO.getCategories()) { // forEach para percorrer todas as categoriasDTO que estão associadas ao meu DTO(productDTO)
+			Category category = categoryRepository.getOne(categoryDTO.getId());
+			product.getCategories().add(category);
 		}
 	}
 
