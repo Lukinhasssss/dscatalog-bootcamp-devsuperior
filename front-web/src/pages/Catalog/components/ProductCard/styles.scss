@@ -1,7 +1,7 @@
 .product-card {
   // width: 245px;
   padding: 20px 20px 30px 20px;
-  text-align: center; /* O text-align akinha textos e imagens */
+  text-align: center; /* O text-align alinha textos e imagens */
 }
 
 .product-info {
@@ -16,4 +16,10 @@
   line-height: 25px;
   letter-spacing: -0.015em;
   color: #263236;
+}
+
+.product-card-image {
+  // width: 100%; /* Desta forma a imagem irá ocupar 100% do container onde ela está */
+  width: 160px;
+  height: 160px;
 }
