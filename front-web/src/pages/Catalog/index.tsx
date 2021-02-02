@@ -5,17 +5,19 @@ import ProductCard from './components/ProductCard'
 import { makeRequest } from 'core/utils/request'
 import { ProductsResponse } from 'core/types/Product'
 import ProductCardLoader from './components/Loaders/ProductCardLoader'
+import Pagination from 'core/components/Pagination'
 
 import './styles.scss'
 
 const Catalog = () => {
   const [productsResponse, setProductsResponse] = useState<ProductsResponse>()
   const [isLoading, setIsLoading] = useState(false)
+  const [activePage, setActivePage] = useState(0) // estado que vai representar qual é a página ativa
 
   // Buscando a lista de produtos na inicialização do componente
   useEffect(() => {
     const params = {
-      page: 0,
+      page: activePage,
       linesPerPage: 12
     }
 
@@ -28,7 +30,7 @@ const Catalog = () => {
         // Finalizando o Loader
         setIsLoading(false)
       })
-  }, []) // O primeiro parâmetro é uma function e o segundo parâmetro é uma lista de dependências. Quando a lista está vazia significa que a função vai disparar assim que o componente iniciar
+  }, [activePage]) // O primeiro parâmetro é uma function e o segundo parâmetro é uma lista de dependências. Quando a lista está vazia significa que a função vai disparar assim que o componente iniciar
 
   return (
     <div className="catalog-container">
@@ -44,6 +46,13 @@ const Catalog = () => {
           ))
         )}
       </div>
+      {productsResponse && (
+        <Pagination
+          totalPages={ productsResponse.totalPages }
+          activePage={ activePage }
+          onChange={page => setActivePage(page)}
+        />
+      )}
     </div>
   )
 }
