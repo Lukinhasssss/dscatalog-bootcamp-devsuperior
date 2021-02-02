@@ -1,4 +1,4 @@
-import { ReactComponent as ArrowIcon } from '../../assets/images/arrow.svg'
+import { ReactComponent as ArrowIcon } from 'core/assets/images/arrow.svg'
 
 import './styles.scss'
 
