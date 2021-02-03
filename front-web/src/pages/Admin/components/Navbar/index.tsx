@@ -1,3 +1,5 @@
+import { NavLink } from 'react-router-dom'
+
 import './styles.scss'
 
 const Navbar = () => {
@@ -5,13 +7,19 @@ const Navbar = () => {
     <nav className="admin-nav-container">
       <ul>
         <li>
-          <a href="#produtos" className="admin-nav-item active">Meus Produtos</a>
+          <NavLink to="/admin/products" className="admin-nav-item">
+            Meus Produtos
+          </NavLink>
         </li>
         <li>
-          <a href="categorias" className="admin-nav-item">Minhas Categorias</a>
+          <NavLink to="/admin/categories" className="admin-nav-item">
+            Minhas Categorias
+          </NavLink>
         </li>
         <li>
-          <a href="usuarios" className="admin-nav-item">Meus Usuários</a>
+          <NavLink to="/admin/users" className="admin-nav-item">
+            Meus Usuários
+          </NavLink>
         </li>
       </ul>
     </nav>
@@ -19,3 +27,5 @@ const Navbar = () => {
 }
 
 export default Navbar
+
+/* O NavLink coloca por padrão a classe active e para alterar é só alterar o activeClassName */
