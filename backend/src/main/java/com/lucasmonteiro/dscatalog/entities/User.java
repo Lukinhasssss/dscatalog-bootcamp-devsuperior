@@ -4,7 +4,9 @@ import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -24,10 +26,12 @@ public class User implements Serializable {
 	private Long id;
 	private String firstName;
 	private String lastName;
+	
+	@Column(unique = true) // Para que o banco não aceite a inserseção de um email que já exista
 	private String email;
 	private String password;
 	
-	@ManyToMany
+	@ManyToMany(fetch = FetchType.EAGER) // fetch = FetchType.EAGER --> Serve para forçar que sempre que for buscar um usuário no banco já vai vir pendurado nele os Roles
 	@JoinTable(name = "tb_user_role",
 		joinColumns = @JoinColumn(name = "user_id"), // joinColumns vai estabelecer qual vai ser a chave estrangeira relacionada a classe onde eu estou
 		inverseJoinColumns = @JoinColumn(name = "role_id") // inverseJoinColumns é a chave estrangeira que faz o outro lado da associação
