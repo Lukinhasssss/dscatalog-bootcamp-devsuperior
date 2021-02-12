@@ -32,6 +32,7 @@ public class ProductResource {
 	
 	@GetMapping
 	public ResponseEntity<Page<ProductDTO>> findAll(
+			@RequestParam(value = "categoryId", defaultValue = "0") Long categoryId, // Aqui recebe o argumento categoryId
 			@RequestParam(value = "page", defaultValue = "0") Integer page,
 			@RequestParam(value = "linesPerPage", defaultValue = "12") Integer linesPerPage,
 			@RequestParam(value = "direction", defaultValue = "ASC") String direction,
@@ -40,7 +41,7 @@ public class ProductResource {
 		
 		PageRequest pageRequest = PageRequest.of(page, linesPerPage, Direction.valueOf(direction), orderBy);
 		
-		Page<ProductDTO> products = service.findAllPaged(pageRequest);
+		Page<ProductDTO> products = service.findAllPaged(categoryId, pageRequest); // Aqui passa o argumento categoryId para o service
 		
 		return ResponseEntity.ok().body(products);
 	}
