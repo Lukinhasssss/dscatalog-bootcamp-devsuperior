@@ -32,7 +32,8 @@ public class ProductResource {
 	
 	@GetMapping
 	public ResponseEntity<Page<ProductDTO>> findAll(
-			@RequestParam(value = "categoryId", defaultValue = "0") Long categoryId, // Aqui recebe o argumento categoryId
+			@RequestParam(value = "categoryId", defaultValue = "0") Long categoryId, // Aqui recebe o argumento categoryId passado na url
+			@RequestParam(value = "name", defaultValue = "") String name, // Aqui recebe o argumento name passado na url
 			@RequestParam(value = "page", defaultValue = "0") Integer page,
 			@RequestParam(value = "linesPerPage", defaultValue = "12") Integer linesPerPage,
 			@RequestParam(value = "direction", defaultValue = "ASC") String direction,
@@ -41,7 +42,7 @@ public class ProductResource {
 		
 		PageRequest pageRequest = PageRequest.of(page, linesPerPage, Direction.valueOf(direction), orderBy);
 		
-		Page<ProductDTO> products = service.findAllPaged(categoryId, pageRequest); // Aqui passa o argumento categoryId para o service
+		Page<ProductDTO> products = service.findAllPaged(categoryId, name.trim(), pageRequest); // Aqui passa os argumentos para o service | trim() --> Elimina espaços em branco
 		
 		return ResponseEntity.ok().body(products);
 	}
