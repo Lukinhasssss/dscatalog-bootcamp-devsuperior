@@ -1,5 +1,7 @@
 package com.lucasmonteiro.dscatalog.services; // Obs: O service tem dependência do resource(Controller)
 
+import java.util.Arrays;
+import java.util.List;
 import java.util.Optional;
 
 import javax.persistence.EntityNotFoundException;
@@ -32,8 +34,8 @@ public class ProductService {
 	
 	@Transactional(readOnly = true)
 	public Page<ProductDTO> findAllPaged(Long categoryId, String name, PageRequest pageRequest) {
-		Category category = (categoryId == 0) ? null : categoryRepository.getOne(categoryId); // Instancia a categoria a partir do categoryId e passa para o categoryRepository
-		Page<Product> products = repository.find(category, name, pageRequest);
+		List<Category> categories = (categoryId == 0) ? null : Arrays.asList(categoryRepository.getOne(categoryId)); // Instancia a categoria a partir do categoryId e passa para o categoryRepository
+		Page<Product> products = repository.find(categories, name, pageRequest);
 		return products.map(product -> new ProductDTO(product));
 	}
 	
