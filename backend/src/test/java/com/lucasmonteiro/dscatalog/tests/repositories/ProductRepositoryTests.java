@@ -15,8 +15,8 @@ import org.springframework.data.domain.PageRequest;
 
 import com.lucasmonteiro.dscatalog.entities.Category;
 import com.lucasmonteiro.dscatalog.entities.Product;
-import com.lucasmonteiro.dscatalog.factory.ProductFactory;
 import com.lucasmonteiro.dscatalog.repositories.ProductRepository;
+import com.lucasmonteiro.dscatalog.tests.factory.ProductFactory;
 
 @DataJpaTest // Vai executar este teste carregando somente os componentes do Spring Data JPA
 public class ProductRepositoryTests {

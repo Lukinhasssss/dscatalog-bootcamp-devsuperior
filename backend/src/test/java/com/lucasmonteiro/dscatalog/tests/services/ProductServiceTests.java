@@ -22,11 +22,11 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import com.lucasmonteiro.dscatalog.dto.ProductDTO;
 import com.lucasmonteiro.dscatalog.entities.Product;
-import com.lucasmonteiro.dscatalog.factory.ProductFactory;
 import com.lucasmonteiro.dscatalog.repositories.ProductRepository;
 import com.lucasmonteiro.dscatalog.services.ProductService;
 import com.lucasmonteiro.dscatalog.services.exceptions.DatabaseException;
 import com.lucasmonteiro.dscatalog.services.exceptions.ResourceNotFoundException;
+import com.lucasmonteiro.dscatalog.tests.factory.ProductFactory;
 
 @ExtendWith(SpringExtension.class)
 public class ProductServiceTests {
