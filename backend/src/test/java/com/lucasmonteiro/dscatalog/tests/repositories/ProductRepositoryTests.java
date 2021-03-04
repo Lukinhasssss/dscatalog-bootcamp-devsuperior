@@ -67,6 +67,17 @@ public class ProductRepositoryTests {
 	}
 	
 	@Test
+	public void findShouldReturnNothingWhenNameDoesNotExists() {
+		
+		String name = "Camera";
+		
+		Page<Product> result = repository.find(null, name, pageRequest);
+		
+		Assertions.assertTrue(result.isEmpty());
+		
+	}
+	
+	@Test
 	public void findShouldReturnAllProductsWhenNameIsEmpty() {
 		
 		String name = "";
@@ -75,6 +86,7 @@ public class ProductRepositoryTests {
 		
 		Assertions.assertFalse(result.isEmpty());
 		Assertions.assertEquals(countTotalProducts, result.getTotalElements());
+		
 	}
 	
 	@Test
@@ -86,6 +98,7 @@ public class ProductRepositoryTests {
 		
 		Assertions.assertFalse(result.isEmpty());
 		Assertions.assertEquals(countPCGamerProducts, result.getTotalElements());
+		
 	}
 	
 	@Test
@@ -97,6 +110,7 @@ public class ProductRepositoryTests {
 		
 		Assertions.assertFalse(result.isEmpty());
 		Assertions.assertEquals(countPCGamerProducts, result.getTotalElements());
+		
 	}
 	
 	@Test
