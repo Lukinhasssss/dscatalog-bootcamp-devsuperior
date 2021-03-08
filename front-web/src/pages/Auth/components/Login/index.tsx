@@ -35,7 +35,7 @@ const Login = () => {
           type="password"
           className="form-control input-base"
           placeholder="Senha"
-          name="senha"
+          name="password"
           ref={ register }
         />
         <Link to="/admin/auth/recover" className="login-link-recover">
