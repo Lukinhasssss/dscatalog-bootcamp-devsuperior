@@ -13,3 +13,10 @@ type LoginResponse = {
 export const saveSessionData = (loginResponse: LoginResponse) => {
   localStorage.setItem('authData', JSON.stringify(loginResponse))
 }
+
+export const getSessionData = () => {
+  const sessionData = localStorage.getItem('authData') ?? '{}' // Se o localStorage for null ou undefined vai retornar uma string com um objeto vazio
+  const parsedSessionData = JSON.parse(sessionData) // JSON.parse() --> Transforma string em objeto
+
+  return parsedSessionData as LoginResponse
+}
