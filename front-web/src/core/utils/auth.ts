@@ -55,5 +55,7 @@ export const isAllowedByRole = (routeRoles: Role[] = []) => {
     return true
   }
 
-  return false
+  const { authorities } = getAccessTokenDecoded()
+
+  return routeRoles.some(role => authorities.includes(role))
 }
