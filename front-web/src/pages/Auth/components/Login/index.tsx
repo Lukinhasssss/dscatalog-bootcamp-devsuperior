@@ -1,4 +1,4 @@
-import { Link, useHistory } from 'react-router-dom'
+import { Link, useHistory, useLocation } from 'react-router-dom'
 import { useForm } from 'react-hook-form';
 import { useState } from 'react';
 
@@ -15,17 +15,24 @@ type FormData = {
   password: string
 }
 
+type LocationState = {
+  from: string
+}
+
 const Login = () => {
   const { register, handleSubmit, errors } = useForm<FormData>()
   const [hasError, setHasError] = useState(false)
   const history = useHistory()
+  const location = useLocation<LocationState>()
+
+  const { from } = location.state || { from: { pathname: "/admin" } }
 
   const onSubmit = (data: FormData) => {
     makeLogin(data)
       .then(response => {
         setHasError(false)
         saveSessionData(response.data) // Salva os dados da sessão do usuário no local storage
-        history.push('/admin')
+        history.replace(from) // Replace remove o item da pilha e substitui por outro
       })
       .catch(() => {
         setHasError(true)
