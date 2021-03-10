@@ -1,13 +1,12 @@
-import { Router, Redirect, Route, Switch } from 'react-router-dom'
-
+import history from 'core/utils/history'
+import Auth from 'pages/Auth'
+import { Redirect, Route, Router, Switch } from 'react-router-dom'
 import Navbar from './core/components/Navbar'
-import Home from './pages/Home'
+import Admin from './pages/Admin'
 import Catalog from './pages/Catalog'
 import ProductDetails from './pages/Catalog/components/ProductDetails'
-import Admin from './pages/Admin'
-import Auth from 'pages/Auth'
-import history from 'core/utils/history'
-import PrivateRoute from 'core/components/Routes/PrivateRoute'
+import Home from './pages/Home'
+
 
 const Routes = () => (
   <Router history={ history }>
@@ -31,9 +30,9 @@ const Routes = () => (
       </Route>
 
       <Redirect from="/admin" to="/admin/products" exact />
-      <PrivateRoute path="/admin">
+      <Route path="/admin">
         <Admin />
-      </PrivateRoute>
+      </Route>
     </Switch>
   </Router>
 )

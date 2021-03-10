@@ -12,7 +12,7 @@ type LoginResponse = {
   userId: number
 }
 
-type Role = 'ROLE_OPERATOR' | 'ROLE_ADMIN'
+export type Role = 'ROLE_OPERATOR' | 'ROLE_ADMIN'
 
 type AccessToken = {
   exp: number // é o tempo de expiração
@@ -48,4 +48,12 @@ export const isAuthenticated = () => {
   const sessionData = getSessionData()
 
   return sessionData.access_token && isTokenValid()
+}
+
+export const isAllowedByRole = (routeRoles: Role[] = []) => {
+  if (routeRoles.length === 0) {
+    return true
+  }
+
+  return false
 }
