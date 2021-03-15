@@ -25,8 +25,11 @@ const Card = ({ product }: Props) => {
           <ProductPrice price={ product.price } />
           <div>
             {product.categories.map(category => (
-              <span className="badge badge-pill badge-secondary mr-2">{ category }</span>
+              <span className="badge badge-pill badge-secondary mr-2">{ category.name }</span>
             ))}
+            {/* <span className="badge badge-pill badge-secondary mr-2">Categoria 1</span>
+            <span className="badge badge-pill badge-secondary mr-2">Categoria 2</span>
+            <span className="badge badge-pill badge-secondary mr-2">Categoria 3</span> */}
           </div>
         </div>
 
