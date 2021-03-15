@@ -1,6 +1,6 @@
 import { useHistory } from 'react-router-dom'
 
-import './styles.scss'
+import Card from '../Card'
 
 const List = () => {
   const history = useHistory()
@@ -11,9 +11,17 @@ const List = () => {
 
   return (
     <div className="admin-products-list">
-      <button className="btn btn-lg btn-primary" onClick={ handleCreate }>
+      <button
+        className="btn btn-lg btn-primary border-radius-10"
+        onClick={ handleCreate }
+      >
         ADICIONAR
       </button>
+      <div className="admin-list-container">
+        <Card />
+        <Card />
+        <Card />
+      </div>
     </div>
   )
 }
