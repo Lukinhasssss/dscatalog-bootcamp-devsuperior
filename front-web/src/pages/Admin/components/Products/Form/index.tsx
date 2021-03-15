@@ -1,87 +1,59 @@
-import { makePrivateRequest } from 'core/utils/request'
-import { useState } from 'react'
-import BaseForm from '../../BaseForm'
-import './styles.scss'
+import { useForm } from 'react-hook-form'
 
+import BaseForm from '../../BaseForm'
+import { makePrivateRequest } from 'core/utils/request'
+
+import './styles.scss'
 
 type FormState = {
   name: string
   price: string
-  category: string
+  // category: string
   description: string
+  imageUrl: string
 }
 
-type FormEvent = React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>
-
 const Form = () => {
-  const [formData, setFormData] = useState<FormState>({
-    name: '',
-    price: '',
-    category: '',
-    description: ''
-  })
+  const { register, handleSubmit } = useForm<FormState>()
 
-  const handleOnChange =(event: FormEvent) => { // Também é possível colocar o event do tipo any --> event: any
-    const name = event.target.name
-    const value = event.target.value
-
-    // console.log({ name, value })
-    setFormData(data => ({ ...data, [name]: value }))
-  }
-
-  const handleOnSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault()
-
-    const payload = {
-      ...formData, // Significa que o payload vai ter tudo que tem no formData
-      imgUrl: 'https://images7.kabum.com.br/produtos/fotos/115737/console-sony-playstation-5-midia-fisica_1598984720_g.jpg',
-      categories: [{ id: formData.category }]
-    }
-
-    makePrivateRequest({ url:'/products', method: 'POST', data: payload })
-      .then(() => {
-        setFormData({ name: '', category: '', price: '', description: '' })
-      })
+  const onSubmit = (data: FormState) => {
+    // console.log(data)
+    makePrivateRequest({ url:'/products', method: 'POST', data })
   }
 
   return (
-    <form onSubmit={ handleOnSubmit }>
+    <form onSubmit={ handleSubmit(onSubmit) }>
       <BaseForm title="Cadastrar um produto">
         <div className="row">
           <div className="col-6">
             <input
-              value={ formData.name }
               name="name" // É o atributo que identifica o campo
               type="text"
-              className="form-control mb-5"
-              onChange={ handleOnChange }
+              className="form-control margin-bottom-30 input-base"
               placeholder="Nome do produto"
+              ref={ register({ required: "Campo obrigatório" }) }
             />
-            <select
-              value={ formData.category }
-              className="form-control mb-5"
-              name="category" // É o atributo que identifica o campo
-              onChange={ handleOnChange }
-              >
-              <option value="1">Livros</option>
-              <option value="3">Computadores</option>
-              <option value="2">Eletrônicos</option>
-            </select>
             <input
-              value={ formData.price }
               name="price" // É o atributo que identifica o campo
-              type="text"
-              className="form-control"
-              onChange={ handleOnChange }
+              type="number"
+              className="form-control margin-bottom-30 input-base"
               placeholder="Preço"
+              ref={ register({ required: "Campo obrigatório" }) }
+            />
+            <input
+              name="imageUrl" // É o atributo que identifica o campo
+              type="text"
+              className="form-control margin-bottom-30 input-base"
+              placeholder="Imagem"
+              ref={ register({ required: "Campo obrigatório" }) }
             />
           </div>
           <div className="col-6">
             <textarea
               name="description"
-              value={ formData.description }
-              onChange={ handleOnChange }
-              className="form-control"
+              className="form-control input-base"
+              placeholder="Descrição"
+              ref={ register({ required: "Campo obrigatório" }) }
               cols={30}
               rows={10}
             />

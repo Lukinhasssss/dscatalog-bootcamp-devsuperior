@@ -56,6 +56,10 @@ public class ProductService {
 	public ProductDTO insert(ProductDTO productDTO) {
 		Product product = new Product();
 		copyDtoToEntity(productDTO, product);
+		if (product.getCategories().size() == 0) {
+			Category category = categoryRepository.getOne(1L);
+			product.getCategories().add(category);
+		}
 		product = repository.save(product);
 		return new ProductDTO(product);
 	}
