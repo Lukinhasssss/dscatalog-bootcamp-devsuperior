@@ -1,9 +1,34 @@
 import { useHistory } from 'react-router-dom'
+import { useEffect, useState } from 'react'
 
 import Card from '../Card'
+import { makeRequest } from 'core/utils/request'
+import { ProductsResponse } from 'core/types/Product'
+import Pagination from 'core/components/Pagination'
 
 const List = () => {
+  const [productsResponse, setProductsResponse] = useState<ProductsResponse>()
+  const [isLoading, setIsLoading] = useState(false)
+  const [activePage, setActivePage] = useState(0) // estado que vai representar qual é a página ativa
   const history = useHistory()
+
+  // Buscando a lista de produtos na inicialização do componente
+  useEffect(() => {
+    const params = {
+      page: activePage,
+      linesPerPage: 4
+    }
+
+    // Iniciando o Loader
+    setIsLoading(true)
+
+    makeRequest({ url: '/products', params })
+      .then(response => setProductsResponse(response.data))
+      .finally(() => {
+        // Finalizando o Loader
+        setIsLoading(false)
+      })
+  }, [activePage])
 
   const handleCreate = () => {
     history.push('/admin/products/create')
@@ -18,9 +43,16 @@ const List = () => {
         ADICIONAR
       </button>
       <div className="admin-list-container">
-        <Card />
-        <Card />
-        <Card />
+        {productsResponse?.content.map(product => (
+          <Card product={ product } key={ product.id } />
+        ))}
+        {productsResponse && (
+          <Pagination
+            totalPages={ productsResponse.totalPages }
+            activePage={ activePage }
+            onChange={ page => setActivePage(page) }
+          />
+        )}
       </div>
     </div>
   )
