@@ -1,5 +1,8 @@
-import ProductPrice from 'core/components/ProductPrice'
+import { Link } from 'react-router-dom'
+
 import { Product } from 'core/types/Product'
+import ProductPrice from 'core/components/ProductPrice'
+
 import './styles.scss'
 
 type Props = {
@@ -25,7 +28,7 @@ const Card = ({ product }: Props) => {
           <ProductPrice price={ product.price } />
           <div>
             {product.categories.map(category => (
-              <span className="badge badge-pill badge-secondary mr-2">{ category.name }</span>
+              <span className="badge badge-pill badge-secondary mr-2" key={ category.id }>{ category.name }</span>
             ))}
             {/* <span className="badge badge-pill badge-secondary mr-2">Categoria 1</span>
             <span className="badge badge-pill badge-secondary mr-2">Categoria 2</span>
@@ -34,12 +37,13 @@ const Card = ({ product }: Props) => {
         </div>
 
         <div className="col-3 py-3 pr-5">
-          <button
+          <Link
+            to={ `/admin/products/${product.id}` }
             type="button"
             className="btn btn-outline-primary btn-block border-radius-10 mb-3 font-weight-bold"
           >
             EDITAR
-          </button>
+          </Link>
           <button
             type="button"
             className="btn btn-outline-danger btn-block border-radius-10 font-weight-bold"

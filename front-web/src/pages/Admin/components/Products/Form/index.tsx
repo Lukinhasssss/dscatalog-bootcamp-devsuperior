@@ -1,39 +1,58 @@
 import { useForm } from 'react-hook-form'
 import { toast } from "react-toastify";
-import { useHistory } from 'react-router';
+import { useHistory, useParams } from 'react-router';
+import { useEffect } from 'react';
 
 import BaseForm from '../../BaseForm'
-import { makePrivateRequest } from 'core/utils/request'
+import { makePrivateRequest, makeRequest } from 'core/utils/request'
 
 import './styles.scss'
 
 type FormState = {
   name: string
   price: string
-  // category: string
   description: string
-  imageUrl: string
+  imgUrl: string
+}
+
+type ParamsType = {
+  productId: string
 }
 
 const Form = () => {
-  const { register, handleSubmit, errors } = useForm<FormState>()
+  const { register, handleSubmit, errors, setValue } = useForm<FormState>()
   const history = useHistory()
+  const { productId } = useParams<ParamsType>()
+  const isEditing = productId !== 'create'
+
+  useEffect(() => {
+    if (isEditing) {
+      makeRequest({ url: `/products/${productId}` })
+        .then(response => {
+          setValue('name', response.data.name)
+          setValue('price', response.data.price)
+          setValue('imgUrl', response.data.imgUrl)
+          setValue('description', response.data.description)
+        })
+    }
+  }, [productId, isEditing, setValue])
 
   const onSubmit = (data: FormState) => {
-    // console.log(data)
-    makePrivateRequest({ url:'/products', method: 'POST', data })
-      .then(() => {
-        toast.info('Produto cadastrado com sucesso!')
+    makePrivateRequest({
+      url: isEditing ? `/products/${productId}` : '/products',
+      method: isEditing ? 'PUT' : 'POST',
+      data
+    }).then(() => {
+        toast.info(isEditing ? 'Produto editado com sucesso!' : 'Produto cadastrado com sucesso!')
         history.push('/admin/products')
-      })
-      .catch(() => {
-        toast.error('Erro ao cadastrar produto')
-      })
+    }).catch(() => {
+        toast.error(isEditing ? 'Erro ao editar produto' : 'Erro ao cadastrar produto')
+    })
   }
 
   return (
     <form onSubmit={ handleSubmit(onSubmit) }>
-      <BaseForm title="Cadastrar um produto">
+      <BaseForm title={ isEditing ? "Editar um produto" : "Cadastrar um produto" }>
         <div className="row">
           <div className="col-6">
             <div className="margin-bottom-30">
@@ -70,15 +89,15 @@ const Form = () => {
             </div>
             <div className="margin-bottom-30">
               <input
-                name="imageUrl" // É o atributo que identifica o campo
+                name="imgUrl" // É o atributo que identifica o campo
                 type="text"
                 className="form-control input-base"
                 placeholder="Imagem"
                 ref={ register({ required: "Campo obrigatório" }) }
               />
-              {errors.imageUrl && (
+              {errors.imgUrl && (
                 <div className="invalid-feedback d-block">
-                  { errors.imageUrl.message }
+                  { errors.imgUrl.message }
                 </div>
               )}
             </div>
