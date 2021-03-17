@@ -7,10 +7,11 @@ import Select from 'react-select';
 import BaseForm from '../../BaseForm'
 import { makePrivateRequest, makeRequest } from 'core/utils/request'
 import { Category } from 'core/types/Product';
+import PriceField from './PriceField';
 
 import './styles.scss'
 
-type FormState = {
+export type FormState = {
   name: string
   price: string
   description: string
@@ -98,6 +99,7 @@ const Form = () => {
                 classNamePrefix="categories-select"
                 placeholder="Categorias"
                 rules={{ required: true }}
+                defaultValue=""
                 isMulti
               />
               {errors.categories && (
@@ -107,13 +109,7 @@ const Form = () => {
               )}
             </div>
             <div className="margin-bottom-30">
-              <input
-                name="price" // É o atributo que identifica o campo
-                type="number"
-                className="form-control input-base"
-                placeholder="Preço"
-                ref={ register({ required: "Campo obrigatório" }) }
-              />
+              <PriceField control={ control } />
               {errors.price && (
                 <div className="invalid-feedback d-block">
                   { errors.price.message }
