@@ -8,6 +8,7 @@ import BaseForm from '../../BaseForm'
 import { makePrivateRequest, makeRequest } from 'core/utils/request'
 import { Category } from 'core/types/Product';
 import PriceField from './PriceField';
+import ImageUpload from '../ImageUpload';
 
 import './styles.scss'
 
@@ -117,18 +118,7 @@ const Form = () => {
               )}
             </div>
             <div className="margin-bottom-30">
-              <input
-                name="imgUrl" // É o atributo que identifica o campo
-                type="text"
-                className="form-control input-base"
-                placeholder="Imagem"
-                ref={ register({ required: "Campo obrigatório" }) }
-              />
-              {errors.imgUrl && (
-                <div className="invalid-feedback d-block">
-                  { errors.imgUrl.message }
-                </div>
-              )}
+              <ImageUpload />
             </div>
           </div>
           <div className="col-6">
