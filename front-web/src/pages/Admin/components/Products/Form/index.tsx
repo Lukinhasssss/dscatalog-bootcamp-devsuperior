@@ -30,6 +30,7 @@ const Form = () => {
   const { productId } = useParams<ParamsType>()
   const [categories, setCategories] = useState<Category[]>([])
   const [isLoadingCategories, setIsLoadingCategories] = useState(false)
+  const [uploadedImgUrl, setUploadedImgUrl] = useState('')
   const isEditing = productId !== 'create'
 
   useEffect(() => {
@@ -53,16 +54,25 @@ const Form = () => {
   }, [])
 
   const onSubmit = (data: FormState) => {
+    const payload = {
+      ...data,
+      imgUrl: uploadedImgUrl
+    }
+
     makePrivateRequest({
       url: isEditing ? `/products/${productId}` : '/products',
       method: isEditing ? 'PUT' : 'POST',
-      data
+      data: payload
     }).then(() => {
         toast.info(isEditing ? 'Produto editado com sucesso!' : 'Produto cadastrado com sucesso!')
         history.push('/admin/products')
     }).catch(() => {
         toast.error(isEditing ? 'Erro ao editar produto' : 'Erro ao cadastrar produto')
     })
+  }
+
+  const onUploadSuccess = (imgUrl: string) => {
+    setUploadedImgUrl(imgUrl)
   }
 
   return (
@@ -118,7 +128,7 @@ const Form = () => {
               )}
             </div>
             <div className="margin-bottom-30">
-              <ImageUpload />
+              <ImageUpload onUploadSuccess={ onUploadSuccess } />
             </div>
           </div>
           <div className="col-6">
