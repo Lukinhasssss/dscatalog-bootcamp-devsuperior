@@ -31,6 +31,7 @@ const Form = () => {
   const [categories, setCategories] = useState<Category[]>([])
   const [isLoadingCategories, setIsLoadingCategories] = useState(false)
   const [uploadedImgUrl, setUploadedImgUrl] = useState('')
+  const [productImgUrl, setProductImgUrl] = useState('')
   const isEditing = productId !== 'create'
 
   useEffect(() => {
@@ -39,9 +40,9 @@ const Form = () => {
         .then(response => {
           setValue('name', response.data.name)
           setValue('price', response.data.price)
-          setValue('imgUrl', response.data.imgUrl)
           setValue('description', response.data.description)
           setValue('categories', response.data.categories)
+          setProductImgUrl(response.data.imgUrl)
         })
     }
   }, [productId, isEditing, setValue])
@@ -128,7 +129,10 @@ const Form = () => {
               )}
             </div>
             <div className="margin-bottom-30">
-              <ImageUpload onUploadSuccess={ onUploadSuccess } />
+              <ImageUpload
+                onUploadSuccess={ onUploadSuccess }
+                productImgUrl={ productImgUrl }
+              />
             </div>
           </div>
           <div className="col-6">
