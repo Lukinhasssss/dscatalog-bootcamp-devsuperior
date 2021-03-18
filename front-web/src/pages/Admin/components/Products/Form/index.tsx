@@ -57,7 +57,7 @@ const Form = () => {
   const onSubmit = (data: FormState) => {
     const payload = {
       ...data,
-      imgUrl: uploadedImgUrl
+      imgUrl: uploadedImgUrl || productImgUrl
     }
 
     makePrivateRequest({
