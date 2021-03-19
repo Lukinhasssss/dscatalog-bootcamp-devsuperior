@@ -1,12 +1,12 @@
 import { Link } from 'react-router-dom'
-import { useEffect, useState } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 
 import ProductCard from './components/ProductCard'
 import { makeRequest } from 'core/utils/request'
 import { ProductsResponse } from 'core/types/Product'
 import ProductCardLoader from './components/Loaders/ProductCardLoader'
 import Pagination from 'core/components/Pagination'
-import ProductFilters from 'core/components/ProductFilters'
+import ProductFilters, { FilterForm } from 'core/components/ProductFilters'
 
 import './styles.scss'
 
@@ -15,11 +15,12 @@ const Catalog = () => {
   const [isLoading, setIsLoading] = useState(false)
   const [activePage, setActivePage] = useState(0) // estado que vai representar qual é a página ativa
 
-  // Buscando a lista de produtos na inicialização do componente
-  useEffect(() => {
+  const getProducts = useCallback((filter?: FilterForm) => {
     const params = {
       page: activePage,
-      linesPerPage: 12
+      linesPerPage: 12,
+      name: filter?.name,
+      categoryId: filter?.categoryId
     }
 
     // Iniciando o Loader
@@ -31,7 +32,12 @@ const Catalog = () => {
         // Finalizando o Loader
         setIsLoading(false)
       })
-  }, [activePage]) // O primeiro parâmetro é uma function e o segundo parâmetro é uma lista de dependências. Quando a lista está vazia significa que a função vai disparar assim que o componente iniciar
+  }, [activePage])
+
+  // Buscando a lista de produtos na inicialização do componente
+  useEffect(() => {
+    getProducts()
+  }, [getProducts]) // O primeiro parâmetro é uma function e o segundo parâmetro é uma lista de dependências. Quando a lista está vazia significa que a função vai disparar assim que o componente iniciar
 
   return (
     <div className="catalog-container">
@@ -39,7 +45,7 @@ const Catalog = () => {
         <h1 className="catalog-title">
           Catálogo de produtos
         </h1>
-        <ProductFilters />
+        <ProductFilters onSearch={ filter => getProducts(filter) } />
       </div>
 
       <div className="catalog-products">

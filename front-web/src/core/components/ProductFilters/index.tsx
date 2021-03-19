@@ -7,9 +7,19 @@ import { Category } from 'core/types/Product'
 
 import './styles.scss'
 
-const ProductFilters = () => {
+export type FilterForm = {
+  name?: string
+  categoryId?: number
+}
+
+type Props = {
+  onSearch: (filter: FilterForm) => void
+}
+
+const ProductFilters = ({ onSearch }: Props) => {
   const [categories, setCategories] = useState<Category[]>([])
   const [isLoadingCategories, setIsLoadingCategories] = useState(false)
+  const [name, setName] = useState('')
 
   useEffect(() => {
     setIsLoadingCategories(true)
@@ -18,13 +28,21 @@ const ProductFilters = () => {
       .finally(() => setIsLoadingCategories(false))
   }, [])
 
+  const handleChangeName = (name: string) => {
+    setName(name)
+
+    onSearch({ name })
+  }
+
   return (
     <div className="card-base product-filters-container">
       <div className="input-search">
         <input
           type="text"
+          value={ name }
           className="form-control"
           placeholder="Pesquisar produto"
+          onChange={ event => handleChangeName(event.target.value) }
         />
         <SearchIcon />
       </div>
