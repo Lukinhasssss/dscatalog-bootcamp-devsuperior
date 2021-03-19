@@ -7,6 +7,7 @@ import { makePrivateRequest, makeRequest } from 'core/utils/request'
 import { ProductsResponse } from 'core/types/Product'
 import Pagination from 'core/components/Pagination'
 import CardLoader from '../Loaders/ProductCardLoader'
+import ProductFilters, { FilterForm } from 'core/components/ProductFilters'
 
 const List = () => {
   const [productsResponse, setProductsResponse] = useState<ProductsResponse>()
@@ -14,10 +15,12 @@ const List = () => {
   const [activePage, setActivePage] = useState(0) // estado que vai representar qual é a página ativa
   const history = useHistory()
 
-  const getProducts = useCallback(() => {
+  const getProducts = useCallback((filter?: FilterForm) => {
     const params = {
       page: activePage,
       linesPerPage: 4,
+      name: filter?.name,
+      categoryId: filter?.categoryId,
       direction: 'DESC',
       orderBy: 'id'
     }
@@ -59,12 +62,16 @@ const List = () => {
 
   return (
     <div className="admin-products-list">
-      <button
-        className="btn btn-lg btn-primary border-radius-10"
-        onClick={ handleCreate }
-      >
-        ADICIONAR
-      </button>
+      <div className="d-flex justify-content-between">
+        <button
+          className="btn btn-lg btn-primary border-radius-10"
+          onClick={ handleCreate }
+        >
+          ADICIONAR
+        </button>
+        <ProductFilters onSearch={ filter => getProducts(filter) } />
+      </div>
+
       <div className="admin-list-container">
         {isLoading ? <CardLoader /> : (
           productsResponse?.content.map(product => (
