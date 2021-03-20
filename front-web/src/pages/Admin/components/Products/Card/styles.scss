@@ -21,3 +21,9 @@
   line-height: 25px;
   letter-spacing: -0.015em;
 }
+
+@media (max-width: 768px) {
+  .product-card-name-admin {
+    margin-bottom: -38px;
+  }
+}

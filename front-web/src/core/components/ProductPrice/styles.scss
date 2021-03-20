@@ -17,3 +17,9 @@
   color: #407BFF;
   margin-left: 10px;
 }
+
+@media (max-width: 768px) {
+  .product-price-container {
+    margin-top: 38px;
+  }
+}
