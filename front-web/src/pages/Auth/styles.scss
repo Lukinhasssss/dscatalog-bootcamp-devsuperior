@@ -22,3 +22,13 @@
   letter-spacing: -0.015em;
   color: #9e9e9e;
 }
+
+@media (max-width: 768px) {
+  .auth-info {
+    display: none;
+  }
+
+  .auth-container {
+    padding: 40px 10px;
+  }
+}

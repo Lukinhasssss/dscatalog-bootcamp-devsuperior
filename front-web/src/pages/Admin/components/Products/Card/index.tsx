@@ -13,46 +13,44 @@ type Props = {
 const Card = ({ product, onRemove }: Props) => {
   return (
     <div className="card-base product-card-admin">
-      <div className="row">
-        <div className="col-2 text-center border-right py-3">
-          <img
-            src={ product.imgUrl }
-            alt={ product.name }
-            className="product-card-image-admin"
-          />
-        </div>
+      <div className="text-center border-right py-3">
+        <img
+          src={ product.imgUrl }
+          alt={ product.name }
+          className="product-card-image-admin"
+        />
+      </div>
 
-        <div className="col-7 py-3">
-          <h3 className="product-card-name-admin">
-            { product.name }
-          </h3>
-          <ProductPrice price={ product.price } />
-          <div>
-            {product.categories.map(category => (
-              <span className="badge badge-pill badge-secondary mr-2" key={ category.id }>{ category.name }</span>
-            ))}
-            {/* <span className="badge badge-pill badge-secondary mr-2">Categoria 1</span>
-            <span className="badge badge-pill badge-secondary mr-2">Categoria 2</span>
-            <span className="badge badge-pill badge-secondary mr-2">Categoria 3</span> */}
-          </div>
+      <div className="col-7 py-3">
+        <h3 className="card-content product-card-name-admin">
+          { product.name }
+        </h3>
+        <ProductPrice price={ product.price } />
+        <div>
+          {product.categories.map(category => (
+            <span className="badge badge-pill badge-secondary mr-2" key={ category.id }>{ category.name }</span>
+          ))}
+          {/* <span className="badge badge-pill badge-secondary mr-2">Categoria 1</span>
+          <span className="badge badge-pill badge-secondary mr-2">Categoria 2</span>
+          <span className="badge badge-pill badge-secondary mr-2">Categoria 3</span> */}
         </div>
+      </div>
 
-        <div className="col-3 py-3 pr-5">
-          <Link
-            to={ `/admin/products/${product.id}` }
-            type="button"
-            className="btn btn-outline-primary btn-block border-radius-10 mb-3 font-weight-bold"
-          >
-            EDITAR
-          </Link>
-          <button
-            type="button"
-            className="btn btn-outline-danger btn-block border-radius-10 font-weight-bold"
-            onClick={ () => onRemove(product.id) }
-          >
-            EXCLUIR
-          </button>
-        </div>
+      <div className="col-3 py-3 pr-5">
+        <Link
+          to={ `/admin/products/${product.id}` }
+          type="button"
+          className="btn btn-outline-primary btn-block border-radius-10 mb-3 font-weight-bold"
+        >
+          EDITAR
+        </Link>
+        <button
+          type="button"
+          className="btn btn-outline-danger btn-block border-radius-10 font-weight-bold"
+          onClick={ () => onRemove(product.id) }
+        >
+          EXCLUIR
+        </button>
       </div>
     </div>
   )

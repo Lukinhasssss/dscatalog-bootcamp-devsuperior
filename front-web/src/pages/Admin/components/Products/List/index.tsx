@@ -82,7 +82,7 @@ const List = () => {
     <div className="admin-products-list">
       <div className="d-flex justify-content-between">
         <button
-          className="btn btn-lg btn-primary border-radius-10"
+          className="btn btn-lg btn-primary border-radius-10 mr-3"
           onClick={ handleCreate }
         >
           ADICIONAR
