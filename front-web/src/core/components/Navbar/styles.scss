@@ -1,4 +1,5 @@
 .main-nav {
+  width: 100% !important;
   display: flex;
   flex-wrap: nowrap;
   height: 70px;
@@ -11,6 +12,10 @@
 .nav-logo-text {
   width: 30%;
   color: #fff;
+}
+
+.menu-mobile-button {
+  display: none;
 }
 
 .menu-container {
@@ -51,7 +56,52 @@
 }
 
 @media (max-width: 576px) {
-  .menu-container {
-    border: 1px solid green;
+  .main-nav {
+    width: 100% !important;
+    justify-content: space-between;
+  }
+
+  .menu-container,
+  .user-info-dnone {
+    display: none;
+  }
+
+  .nav-logo-text {
+    width: 50%;
+    margin-left: 15px;
+  }
+
+  .menu-mobile-button {
+    display: block;
+    border: none;
+    background: transparent;
+    width: 30px;
+    outline: 0;
+  }
+
+  .menu-mobile-container {
+    position: absolute;
+    width: 100%;
+    top: 70px;
+    left: 0;
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+    background-color: #407BFF;
+    z-index: 10;
+
+    ul {
+      height: 150px;
+      display: flex;
+      align-items: flex-start;
+      flex: 1;
+      flex-direction: column;
+      top: 40px;
+    }
+
+    li {
+      width: 96vw;
+      margin: 5px 0;
+    }
   }
 }
