@@ -22,7 +22,8 @@
   width: 55%;
   display: flex;
   flex: 1;
-  justify-content: center;
+  justify-content: flex-start;
+  margin-left: 130px;
   flex-wrap: nowrap;
 }
 
@@ -31,7 +32,7 @@
   display: flex;
   flex: 1;
   justify-content: space-between;
-  align-items: flex-end;
+  align-items: flex-start;
 }
 
 .nav-link {
