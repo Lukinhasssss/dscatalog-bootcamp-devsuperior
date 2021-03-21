@@ -100,3 +100,44 @@
     width: 460px;
   }
 }
+
+@media (max-width: 576px) {
+  .product-details-container {
+    margin-top: 5px;
+    padding: 10px;
+  }
+
+  .product-details {
+    display: flex;
+    flex-direction: column;
+    padding: 30px;
+  }
+
+  .product-details-card {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 10px;
+  }
+
+  .product-details-image {
+    width: 210px;
+    height: 210px;
+  }
+
+  .product-info-fields {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .product-details-name {
+    margin-bottom: -20px;
+  }
+
+  .product-description-text {
+    width: 90%;
+  }
+}

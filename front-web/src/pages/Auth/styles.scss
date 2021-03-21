@@ -32,3 +32,10 @@
     padding: 40px 10px;
   }
 }
+
+@media (max-width: 576px) {
+  .auth-container {
+    margin: 0;
+    padding: 40px 0 0 0; 
+  }
+}

@@ -16,3 +16,15 @@
     flex-direction: column;
   }
 }
+
+@media (max-width: 576px) {
+  .admin-filter-button-add {
+    display: flex;
+    flex-direction: column;
+
+    button {
+      width: 100%;
+      margin-bottom: 30px;
+    }
+  }
+}

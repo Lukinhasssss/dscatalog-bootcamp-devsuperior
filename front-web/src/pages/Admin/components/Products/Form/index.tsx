@@ -79,7 +79,7 @@ const Form = () => {
   return (
     <form onSubmit={ handleSubmit(onSubmit) }>
       <BaseForm title={ isEditing ? "Editar um produto" : "Cadastrar um produto" }>
-        <div className="row">
+        <div className="product-form-container">
           <div className="col-6">
             <div className="margin-bottom-30">
               <input

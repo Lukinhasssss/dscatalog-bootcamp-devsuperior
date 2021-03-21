@@ -69,7 +69,14 @@ const Navbar = () => {
           {isDrawerActive && (
             <li>
               {currentUser && (
-                <a href="#logout" className="nav-link active d-inline" onClick={ () => setIsDrawerActive(false) }>
+                <a
+                  href="#logout"
+                  className="nav-link active d-inline"
+                  onClick={(event) => {
+                    setIsDrawerActive(false)
+                    handleLogout(event)
+                  }}
+                >
                   {`LOGOUT - ${currentUser}`}
                 </a>
               )}

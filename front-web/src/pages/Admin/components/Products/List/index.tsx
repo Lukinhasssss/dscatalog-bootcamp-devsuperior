@@ -80,7 +80,7 @@ const List = () => {
 
   return (
     <div className="admin-products-list">
-      <div className="d-flex justify-content-between">
+      <div className="d-flex justify-content-between admin-filter-button-add">
         <button
           className="btn btn-lg btn-primary border-radius-10 mr-3"
           onClick={ handleCreate }

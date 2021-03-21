@@ -3,8 +3,6 @@ import { Route, Switch } from 'react-router-dom'
 import List from './List'
 import Form from './Form'
 
-import './styles.scss'
-
 const Products = () => {
   return (
     <div>
