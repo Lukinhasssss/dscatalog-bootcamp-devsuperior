@@ -1,10 +1,15 @@
 import React from 'react';
-import { Text, View } from 'react-native';
+import 'react-native-gesture-handler'
+import { NavigationContainer } from '@react-navigation/native';
 
-export default function App() {
+import Routes from './src/routes';
+
+const App: React.FC = () => {
   return (
-    <View>
-      <Text>Hello World!</Text>
-    </View>
+    <NavigationContainer>
+      <Routes />
+    </NavigationContainer>
   );
 }
+
+export default App
