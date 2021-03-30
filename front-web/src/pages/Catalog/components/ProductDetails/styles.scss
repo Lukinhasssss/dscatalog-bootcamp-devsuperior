@@ -113,6 +113,12 @@
     padding: 30px;
   }
 
+  .product-details-info > div.col-6 {
+    display: grid;
+    grid-template-columns: 1fr;
+    padding-left: 30px;
+  }
+
   .product-details-card {
     width: 100%;
     display: flex;

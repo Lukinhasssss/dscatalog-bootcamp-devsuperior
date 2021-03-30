@@ -34,19 +34,21 @@ const ProductDetails = () => {
           <h1 className="text-goback">Voltar</h1>
         </Link>
         <div className="product-details-info"> {/* row é uma classe do bootstrap que já vem com display flex por padrão */}
-          {isLoading ? <ProductInfoLoader /> : (
-            <>
-              <div className="product-details-card text-center"> {/* text-center é uma classe do bootstrap que funciona como text-align */}
-                <img src={ product?.imgUrl } alt={ product?.name } className="product-details-image"/>
-              </div>
-              <div className="product-info-fields">
-                <h1 className="product-details-name">
-                  { product?.name }
-                </h1>
-                { product?.price && <ProductPrice price={ product?.price } /> }
-              </div>
-            </>
-          )}
+          <div className="col-6 pr-5">
+            {isLoading ? <ProductInfoLoader /> : (
+              <>
+                <div className="product-details-card text-center"> {/* text-center é uma classe do bootstrap que funciona como text-align */}
+                  <img src={ product?.imgUrl } alt={ product?.name } className="product-details-image"/>
+                </div>
+                <div className="product-info-fields">
+                  <h1 className="product-details-name">
+                    { product?.name }
+                  </h1>
+                  { product?.price && <ProductPrice price={ product?.price } /> }
+                </div>
+              </>
+            )}
+          </div>
 
           <div className="product-details-card">
             {isLoading ? <ProductDescriptionLoader /> : (
