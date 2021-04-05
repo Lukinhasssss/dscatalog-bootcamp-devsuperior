@@ -1,3 +1,4 @@
+import { useNavigation } from '@react-navigation/core'
 import React from 'react'
 import { Image, ImageSourcePropType, Text, TouchableOpacity, View } from 'react-native'
 import { text, theme } from '../styles'
@@ -10,9 +11,14 @@ interface ProductProps {
 }
 
 const ProductCard: React.FC<ProductProps> = ({ id, name, imgUrl, price }) => {
+  const navigation = useNavigation()
+
   return (
-    <TouchableOpacity style={ theme.productCard }>
-      <Image source={ imgUrl } />
+    <TouchableOpacity
+      style={ theme.productCard }
+      onPress={ () => navigation.navigate('ProductDetails', { id }) }
+    >
+      <Image source={ imgUrl } style={ theme.productImg } />
       <View style={ theme.productDescription }>
         <Text style={ text.productName }>{ name }</Text>
 

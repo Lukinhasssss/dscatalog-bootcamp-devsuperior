@@ -146,6 +146,12 @@ const theme = StyleSheet.create({
     marginTop: 10
   },
 
+  productImg: {
+    width: 140,
+    height: 140,
+    margin: 16
+  },
+
   // SearchInput
 
   inputContainer: {

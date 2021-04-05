@@ -1,50 +1,29 @@
-import React, { useState } from 'react'
-import { ScrollView } from 'react-native'
+import React, { useEffect, useState } from 'react'
+import { ActivityIndicator, ScrollView } from 'react-native'
 
 import { ProductCard, SearchInput } from '../components'
+import { api } from '../services'
 
-import productImg from '../assets/produto.png'
 import { theme } from '../styles'
-
-const products = [
-  {
-    id: 1,
-    imgUrl: productImg,
-    name: 'Xbox Series X',
-    price: 7899.0
-  },
-
-  {
-    id: 2,
-    imgUrl: productImg,
-    name: 'Computador Desktop - Intel Core i7',
-    price: 2279.0
-  },
-
-  {
-    id: 3,
-    imgUrl: productImg,
-    name: 'Computador Desktop - Intel Core i7',
-    price: 2279.0
-  },
-
-  {
-    id: 4,
-    imgUrl: productImg,
-    name: 'Computador Desktop - Intel Core i7',
-    price: 2279.0
-  },
-
-  {
-    id: 5,
-    imgUrl: productImg,
-    name: 'Computador Desktop - Intel Core i7',
-    price: 2279.0
-  }
-]
 
 const Catalog: React.FC = () => {
   const [search, setSearch] = useState('')
+  const [products, setProducts] = useState<any>([])
+  const [isLoading, setIsLoading] = useState(false)
+
+  async function loadProducts() {
+    setIsLoading(true)
+
+    const result = await api.get('/products')
+    setProducts(result.data.content)
+    // console.warn(result)
+
+    setIsLoading(false)
+  }
+
+  useEffect(() => {
+    loadProducts()
+  }, [])
 
   const data =
     search.length > 0
@@ -59,7 +38,10 @@ const Catalog: React.FC = () => {
         setSearch={ setSearch }
       />
 
-      {data.map((product) => (
+      {isLoading ? (
+        <ActivityIndicator size="large" />
+      ) :
+      data.map((product) => (
         <ProductCard key={product.id} {...product} />
       ))}
     </ScrollView>
