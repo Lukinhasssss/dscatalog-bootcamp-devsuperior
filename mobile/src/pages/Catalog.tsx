@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { ScrollView } from 'react-native'
 
 import { ProductCard, SearchInput } from '../components'
@@ -10,8 +10,8 @@ const products = [
   {
     id: 1,
     imgUrl: productImg,
-    name: 'Computador Desktop - Intel Core i7',
-    price: 2279.0
+    name: 'Xbox Series X',
+    price: 7899.0
   },
 
   {
@@ -44,11 +44,22 @@ const products = [
 ]
 
 const Catalog: React.FC = () => {
+  const [search, setSearch] = useState('')
+
+  const data =
+    search.length > 0
+      ? products.filter(product => product.name.toLowerCase().includes(search.toLowerCase()))
+      : products
+
   return (
     <ScrollView contentContainerStyle={ theme.scrollContainer }>
-      <SearchInput placeholder="Nome do produto" />
+      <SearchInput
+        placeholder="Nome do produto"
+        search={ search }
+        setSearch={ setSearch }
+      />
 
-      {products.map((product) => (
+      {data.map((product) => (
         <ProductCard key={product.id} {...product} />
       ))}
     </ScrollView>
