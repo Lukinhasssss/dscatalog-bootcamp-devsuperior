@@ -32,9 +32,25 @@ const text = StyleSheet.create({
     fontSize: 16,
     fontWeight: 'bold',
     textTransform: 'uppercase',
-    marginLeft: 30,
-    marginRight: 5,
+    marginLeft: 20,
     color: colors.white
+  },
+
+  productName: {
+    fontSize: 16,
+    fontWeight: 'bold',
+  },
+
+  currency: {
+    fontSize: 16,
+    fontWeight: '400',
+    color: colors.mediumGray
+  },
+
+  productPrice: {
+    fontSize: 30,
+    color: colors.primary,
+    fontWeight: 'bold'
   }
 })
 
@@ -60,7 +76,7 @@ const theme = StyleSheet.create({
     },
     shadowOpacity: 0.25,
     shadowRadius: 3.84,
-    elevation: 1
+    elevation: 3
   },
 
   draw: {
@@ -90,6 +106,41 @@ const theme = StyleSheet.create({
     borderTopEndRadius: 10,
     borderBottomEndRadius: 10,
     backgroundColor: colors.secondary
+  },
+
+  // productCard
+
+  scrollContainer: {
+    padding: 10
+  },
+
+  productCard: {
+    width: '100%',
+    backgroundColor: colors.white,
+    borderRadius: 10,
+    marginVertical: 10,
+    alignItems: 'center',
+    justifyContent: 'space-around',
+    shadowColor: colors.black,
+    shadowOffset: {
+      width: 0,
+      height: 2
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
+    elevation: 3
+  },
+
+  productDescription: {
+    width: '100%',
+    padding: 20,
+    borderTopColor: colors.lightGray,
+    borderTopWidth: 1
+  },
+
+  priceContainer: {
+    flexDirection: 'row',
+    marginTop: 10
   }
 })
 
