@@ -1,7 +1,7 @@
 import React from 'react'
 import { ScrollView } from 'react-native'
 
-import { ProductCard } from '../components'
+import { ProductCard, SearchInput } from '../components'
 
 import productImg from '../assets/produto.png'
 import { theme } from '../styles'
@@ -46,6 +46,8 @@ const products = [
 const Catalog: React.FC = () => {
   return (
     <ScrollView contentContainerStyle={ theme.scrollContainer }>
+      <SearchInput placeholder="Nome do produto" />
+
       {products.map((product) => (
         <ProductCard key={product.id} {...product} />
       ))}

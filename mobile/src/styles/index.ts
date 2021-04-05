@@ -4,6 +4,7 @@ const colors = {
   white: "#FFF",
   lightGray: "#F2F2F2",
   mediumGray: "#9E9E9E",
+  borderGray: "#E1E1E1",
   darkGray: "#263238",
   black: "#000",
   primary: "#407BFF",
@@ -50,7 +51,8 @@ const text = StyleSheet.create({
   productPrice: {
     fontSize: 30,
     color: colors.primary,
-    fontWeight: 'bold'
+    fontWeight: 'bold',
+    marginLeft: 3
   }
 })
 
@@ -140,7 +142,35 @@ const theme = StyleSheet.create({
 
   priceContainer: {
     flexDirection: 'row',
+    alignItems: 'center',
     marginTop: 10
+  },
+
+  // SearchInput
+
+  inputContainer: {
+    width: '100%',
+    height: 60,
+    backgroundColor: colors.white,
+    borderRadius: 10,
+    alignItems: 'center',
+    marginVertical: 12.5,
+    paddingVertical: 10,
+    shadowColor: colors.black,
+    shadowOffset: {
+      width: 0,
+      height: 2
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
+    elevation: 3
+  },
+
+  searchInput: {
+    width: '90%',
+    height: 40,
+    borderBottomWidth: 0.5,
+    borderBottomColor: colors.borderGray
   }
 })
 
