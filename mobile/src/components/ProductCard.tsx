@@ -18,7 +18,7 @@ const ProductCard: React.FC<ProductProps> = ({ id, name, imgUrl, price }) => {
       style={ theme.productCard }
       onPress={ () => navigation.navigate('ProductDetails', { id }) }
     >
-      <Image source={ imgUrl } style={ theme.productImg } />
+      <Image source={{ uri: imgUrl }} style={ theme.productImg } />
       <View style={ theme.productDescription }>
         <Text style={ text.productName }>{ name }</Text>
 

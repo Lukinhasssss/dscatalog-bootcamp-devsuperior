@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react'
 import { ActivityIndicator, Image, Text, TouchableOpacity, View } from 'react-native'
-
-import { api } from '../services'
-
-import arrow from '../assets/arrow.png'
-import { text, theme } from '../styles'
 import { ScrollView } from 'react-native-gesture-handler'
 import { useNavigation } from '@react-navigation/core'
+
+import { api } from '../services'
+import { text, theme } from '../styles'
+
+import arrow from '../assets/leftArrow.png'
 
 const ProductDetails = ({ route: { params : {id } } }) => {
   const [isLoading, setIsLoading] = useState(false)
@@ -24,9 +24,8 @@ const ProductDetails = ({ route: { params : {id } } }) => {
   async function loadProductData() {
     setIsLoading(true)
 
-    const result = await api.get(`/products/3`)
+    const result = await api.get(`/products/${id}`)
     setProduct(result.data)
-    console.log(result.data)
 
     setIsLoading(false)
   }
@@ -48,7 +47,7 @@ const ProductDetails = ({ route: { params : {id } } }) => {
 
           <View style={ theme.productImgContainer }>
             <Image
-              source={ product.imgUrl }
+              source={{ uri: product.imgUrl }}
               style={{ width: 220, height: 220 }}
             />
           </View>

@@ -1,4 +1,6 @@
-import { StyleSheet } from 'react-native'
+import { Dimensions, StyleSheet } from 'react-native'
+
+const deviceWidth = Dimensions.get('window').width
 
 const colors = {
   white: "#FFF",
@@ -82,7 +84,7 @@ const theme = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    padding: 20
+    padding: 20,
   },
 
   card: {
@@ -248,4 +250,31 @@ const theme = StyleSheet.create({
   }
 })
 
-export { colors, text, theme }
+const nav = StyleSheet.create({
+  leftText: {
+    fontSize: 20,
+    fontWeight: 'bold',
+    color: colors.white,
+    marginLeft: 20
+  },
+
+  drawer: {
+    marginRight: 20
+  },
+
+  options: {
+    width: deviceWidth,
+    height: 120,
+    backgroundColor: colors.primary,
+    marginTop: 125,
+    marginRight: -20,
+    padding: 20,
+    justifyContent: 'space-between'
+  },
+
+  option: {
+    paddingVertical: 5
+  }
+})
+
+export { colors, text, theme, nav }

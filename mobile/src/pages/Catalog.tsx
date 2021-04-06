@@ -8,7 +8,7 @@ import { theme } from '../styles'
 
 const Catalog: React.FC = () => {
   const [search, setSearch] = useState('')
-  const [products, setProducts] = useState<any>([])
+  const [products, setProducts] = useState([])
   const [isLoading, setIsLoading] = useState(false)
 
   async function loadProducts() {
@@ -16,7 +16,7 @@ const Catalog: React.FC = () => {
 
     const result = await api.get('/products')
     setProducts(result.data.content)
-    // console.warn(result)
+    // console.log(result.data.content)
 
     setIsLoading(false)
   }
