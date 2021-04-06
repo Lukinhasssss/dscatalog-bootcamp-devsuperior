@@ -84,7 +84,7 @@ const theme = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    padding: 20,
+    padding: 20
   },
 
   card: {
@@ -259,7 +259,8 @@ const nav = StyleSheet.create({
   },
 
   drawer: {
-    marginRight: 20
+    marginRight: 20,
+    zIndex: 1
   },
 
   options: {
@@ -274,6 +275,15 @@ const nav = StyleSheet.create({
 
   option: {
     paddingVertical: 5
+  },
+
+  textOption: {
+    color: colors.white,
+    textTransform: 'uppercase'
+  },
+
+  textActive: {
+    fontWeight: 'bold'
   }
 })
 

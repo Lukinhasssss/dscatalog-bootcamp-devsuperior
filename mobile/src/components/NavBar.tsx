@@ -2,6 +2,7 @@ import { useRoute } from '@react-navigation/core'
 import { useNavigation } from '@react-navigation/native'
 import React, { useState } from 'react'
 import { Image, Text, TouchableOpacity, View } from 'react-native'
+import { TouchableNativeFeedback } from 'react-native-gesture-handler'
 import menu from '../assets/menu.png'
 import { nav } from '../styles'
 
@@ -28,17 +29,38 @@ const NavBar: React.FC = () => {
       <Image source={ menu } />
       {showMenu && (
         <View style={ nav.options }>
-          <TouchableOpacity>
-            <Text>Home</Text>
-          </TouchableOpacity>
+          <TouchableNativeFeedback style={ nav.option } onPress={ () => navigate('Home') }>
+            <Text
+              style={[
+                nav.textOption,
+                route.name === 'Home' ? nav.textActive : null
+              ]}
+            >
+              Home
+            </Text>
+          </TouchableNativeFeedback>
 
-          <TouchableOpacity>
-            <Text>Catálogo</Text>
-          </TouchableOpacity>
+          <TouchableNativeFeedback style={ nav.option } onPress={ () => navigate('Catalog') }>
+            <Text
+              style={[
+                nav.textOption,
+                route.name === 'Catalog' ? nav.textActive : null
+              ]}
+            >
+              Catálogo
+            </Text>
+          </TouchableNativeFeedback>
 
-          <TouchableOpacity>
-            <Text>Admin</Text>
-          </TouchableOpacity>
+          <TouchableNativeFeedback style={ nav.option } onPress={ () => navigate('Admin') }>
+            <Text
+              style={[
+                nav.textOption,
+                route.name === 'Admin' ? nav.textActive : null
+              ]}
+            >
+              Admin
+            </Text>
+          </TouchableNativeFeedback>
         </View>
       )}
     </TouchableOpacity>
