@@ -350,4 +350,35 @@ const nav = StyleSheet.create({
   }
 })
 
-export { colors, text, theme, nav }
+const tabbar = StyleSheet.create({
+  container: {
+    width: deviceWidth,
+    height: 80,
+    backgroundColor: colors.white,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-around'
+  },
+
+  pill: {
+    padding: 15,
+    backgroundColor: colors.lightGray,
+    borderRadius: 30
+  },
+
+  pillActive: {
+    backgroundColor: colors.bluePill
+  },
+
+  pillText: {
+    fontWeight: 'bold',
+    color: colors.mediumGray
+  },
+
+  pillTextActive: {
+    fontWeight: 'bold',
+    color: colors.primary
+  }
+})
+
+export { colors, text, theme, nav, tabbar }
