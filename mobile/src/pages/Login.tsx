@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { Image, Text, TextInput, TouchableOpacity, View } from 'react-native'
+import { useNavigation } from '@react-navigation/core'
 
 import { text, theme } from '../styles'
 import { isAuthenticated, login } from '../services/auth'
@@ -11,15 +12,14 @@ import arrow from '../assets/arrow.png'
 const Login: React.FC = () => {
   const [hidePassword, setHidePassword] = useState(true)
   const [userInfo, setUserInfo] = useState({ username: '', password: '' })
+  const [userFetchData, setUserFetchData] = useState({})
+  const navigation = useNavigation()
 
   async function handleLogin() {
     const data = await login(userInfo)
-    console.warn(data)
+    setUserFetchData(data)
+    navigation.navigate('Dashboard')
   }
-
-  useEffect(() => {
-    isAuthenticated()
-  }, [])
 
   return (
     <View style={ theme.container }>

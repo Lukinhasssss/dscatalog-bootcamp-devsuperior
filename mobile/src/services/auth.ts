@@ -36,7 +36,16 @@ export async function isAuthenticated() {
   try {
     const token = await AsyncStorage.getItem('@token')
 
-    token ? console.warn('Logado') : console.log('Deslogado')
+    return token ? true : false
+  }
+  catch (error) {
+    console.warn(error)
+  }
+}
+
+export async function doLogout() {
+  try {
+    AsyncStorage.removeItem('@token')
   }
   catch (error) {
     console.warn(error)

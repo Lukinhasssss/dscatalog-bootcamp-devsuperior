@@ -83,6 +83,10 @@ const text = StyleSheet.create({
     color: colors.darkGray,
     textTransform: 'uppercase',
     marginBottom: 50
+  },
+
+  logoutText: {
+    color: colors.white
   }
 })
 
@@ -332,6 +336,17 @@ const nav = StyleSheet.create({
 
   textActive: {
     fontWeight: 'bold'
+  },
+
+  logoutBtn: {
+    width: 60,
+    height: 30,
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginRight: 20,
+    borderWidth: 1,
+    borderColor: colors.white,
+    borderRadius: 10
   }
 })
 
