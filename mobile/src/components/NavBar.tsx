@@ -51,7 +51,7 @@ const NavBar: React.FC = () => {
             </Text>
           </TouchableNativeFeedback>
 
-          <TouchableNativeFeedback style={ nav.option } onPress={ () => navigate('Admin') }>
+          <TouchableNativeFeedback style={ nav.option } onPress={ () => navigate('Login') }>
             <Text
               style={[
                 nav.textOption,
