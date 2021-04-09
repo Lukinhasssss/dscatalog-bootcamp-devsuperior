@@ -8,7 +8,7 @@ import { text, theme } from '../styles'
 
 import arrow from '../assets/leftArrow.png'
 
-const ProductDetails = ({ route: { params : {id } } }) => {
+const ProductDetails = ({ route: { params : { id } } }) => {
   const [isLoading, setIsLoading] = useState(false)
   const navigation = useNavigation()
   const [product, setProduct] = useState({

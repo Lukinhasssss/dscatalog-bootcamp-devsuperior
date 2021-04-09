@@ -1,14 +1,19 @@
 import React, { useEffect, useState } from 'react'
 import { ActivityIndicator, ScrollView, Text, TouchableOpacity } from 'react-native'
-import { ProductCard, SearchInput } from '../../components'
+import { ProductCard, SearchInput } from '../../../components'
 
-import { getProducts } from '../../services'
-import { admin, text } from '../../styles'
+import { getProducts } from '../../../services'
+import { admin, text } from '../../../styles'
 
-const Products: React.FC = () => {
+interface ProductProps {
+  setScreen: Function
+}
+
+const Products: React.FC<ProductProps> = (props) => {
   const [search, setSearch] = useState('')
   const [products, setProducts] = useState([])
   const [isLoading, setIsLoading] = useState(false)
+  const { setScreen } = props
 
   async function loadProducts() {
     setIsLoading(true)
@@ -31,7 +36,7 @@ const Products: React.FC = () => {
 
   return (
     <ScrollView contentContainerStyle={ admin.container }>
-      <TouchableOpacity style={ admin.addButton }>
+      <TouchableOpacity style={ admin.addButton } onPress={ () => setScreen('newProduct') }>
         <Text style={ text.addButtonText }>Adicionar</Text>
       </TouchableOpacity>
 
