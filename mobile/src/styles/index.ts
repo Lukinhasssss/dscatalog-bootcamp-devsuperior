@@ -87,6 +87,24 @@ const text = StyleSheet.create({
 
   logoutText: {
     color: colors.white
+  },
+
+  addButtonText: {
+    color: colors.white,
+    fontWeight: 'bold',
+    textTransform: 'uppercase'
+  },
+
+  deleteButtonText: {
+    fontWeight: 'bold',
+    textTransform: 'uppercase',
+    color: colors.red
+  },
+
+  editButtonText: {
+    fontWeight: 'bold',
+    textTransform: 'uppercase',
+    color: colors.primary
   }
 })
 
@@ -300,6 +318,34 @@ const theme = StyleSheet.create({
 
   toggle: {
     margin: -40
+  },
+
+  buttonContainer: {
+    flexDirection: 'row',
+    alignContent: 'center',
+    justifyContent: 'space-around'
+  },
+
+  deleteButton: {
+    width: '46%',
+    height: 40,
+    borderWidth: 1,
+    borderColor: colors.red,
+    borderRadius: 10,
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginVertical: 10
+  },
+
+  editButton: {
+    width: '46%',
+    height: 40,
+    borderWidth: 1,
+    borderColor: colors.primary,
+    borderRadius: 10,
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginVertical: 10
   }
 })
 
@@ -381,4 +427,21 @@ const tabbar = StyleSheet.create({
   }
 })
 
-export { colors, text, theme, nav, tabbar }
+const admin = StyleSheet.create({
+  container: {
+    padding: 10,
+    alignItems: 'center'
+  },
+
+  addButton: {
+    width: '100%',
+    height: 50,
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: colors.primary,
+    borderRadius: 10,
+    margin: 10
+  }
+})
+
+export { colors, text, theme, nav, tabbar, admin }

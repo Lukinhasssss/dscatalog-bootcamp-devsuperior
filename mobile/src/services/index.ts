@@ -7,3 +7,10 @@ export const api = axios.create({
 })
 
 export const TOKEN = 'Basic ZHNjYXRhbG9nOkBkc2NhdGFsb2cyMjE1'
+
+export function getProducts() {
+  const result = api.get('/products')
+  // const result = api.get('/products?page=0&linesPerPage=12&direction=ASC&orderBy=name')
+
+  return result
+}
