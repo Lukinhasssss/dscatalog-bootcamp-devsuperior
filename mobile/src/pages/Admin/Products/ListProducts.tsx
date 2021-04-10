@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { ActivityIndicator, ScrollView, Text, TouchableOpacity } from 'react-native'
 import { ProductCard, SearchInput } from '../../../components'
 
-import { getProducts } from '../../../services'
+import { deleteProduct, getProducts } from '../../../services'
 import { admin, text } from '../../../styles'
 
 interface ProductProps {
@@ -14,6 +14,15 @@ const Products: React.FC<ProductProps> = (props) => {
   const [products, setProducts] = useState([])
   const [isLoading, setIsLoading] = useState(false)
   const { setScreen } = props
+
+  async function handleOnDelete(id: number) {
+    setIsLoading(true)
+
+    const response = await deleteProduct(id)
+    loadProducts()
+
+    setIsLoading(false)
+  }
 
   async function loadProducts() {
     setIsLoading(true)
@@ -50,7 +59,7 @@ const Products: React.FC<ProductProps> = (props) => {
         <ActivityIndicator size="large" />
       ) :
       data.map((product) => (
-        <ProductCard key={product.id} {...product} role="admin" />
+        <ProductCard key={product.id} {...product} role="admin" handleOnDelete={ handleOnDelete } />
       ))}
     </ScrollView>
   )

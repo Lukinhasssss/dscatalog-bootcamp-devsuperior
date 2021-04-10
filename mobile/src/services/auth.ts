@@ -51,8 +51,3 @@ export async function doLogout() {
     console.warn(error)
   }
 }
-
-export async function userToken() {
-  const token = await AsyncStorage.getItem('@token')
-  return token
-}

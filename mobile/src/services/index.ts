@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { userToken } from './auth'
+import AsyncStorage from '@react-native-async-storage/async-storage'
 
 const BASE_URL= 'https://dscatalog-bootcamp.herokuapp.com'
 
@@ -8,6 +8,11 @@ export const api = axios.create({
 })
 
 export const TOKEN = 'Basic ZHNjYXRhbG9nOkBkc2NhdGFsb2cyMjE1'
+
+export async function userToken() {
+  const token = await AsyncStorage.getItem('@token')
+  return token
+}
 
 export function getProducts() {
   const result = api.get('/products?direction=DESC&orderBy=id')
@@ -19,6 +24,16 @@ export function getProducts() {
 export async function createProduct(data: object) {
   const authToken = await userToken()
   const response = api.post('/products', data, {
+    headers: {
+      Authorization: `Bearer ${authToken}`
+    }
+  })
+  return response
+}
+
+export async function deleteProduct (id: number) {
+  const authToken = await userToken()
+  const response = api.delete(`/products/${id}`, {
     headers: {
       Authorization: `Bearer ${authToken}`
     }
