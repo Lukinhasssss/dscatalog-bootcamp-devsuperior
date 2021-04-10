@@ -1,6 +1,7 @@
 import { Dimensions, StyleSheet } from 'react-native'
 
 const deviceWidth = Dimensions.get('window').width
+const deviceHeight = Dimensions.get('window').height
 
 const colors = {
   white: "#FFF",
@@ -346,6 +347,85 @@ const theme = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     marginVertical: 10
+  },
+
+  // Admin Products Form
+
+  formContainer: {
+    width: deviceWidth,
+    padding: 20
+  },
+
+  formCard: {
+    width: '100%',
+    height: '90%',
+    padding: 20,
+    backgroundColor: colors.white,
+    borderRadius: 20,
+    shadowColor: colors.black,
+    shadowOffset: {
+      width: 0,
+      height: 2
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
+    elevation: 3,
+    alignItems: 'center',
+    justifyContent: 'space-around'
+  },
+
+  modalContainer: {
+    width: deviceWidth,
+    height: deviceHeight,
+    backgroundColor: "#0003",
+    alignItems: 'center',
+    justifyContent: 'center'
+  },
+
+  modalContent: {
+    width: 300,
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginTop: '50%',
+    backgroundColor: colors.white,
+    borderRadius: 20,
+    padding: 20,
+    shadowColor: colors.black,
+    shadowOffset: {
+      width: 0,
+      height: 2
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
+    elevation: 5,
+  },
+
+  modalItem: {
+    width: '100%',
+    backgroundColor: colors.lightGray,
+    padding: 10,
+    marginVertical: 5,
+    borderRadius: 10
+  },
+
+  formInput: {
+    width: '100%',
+    height: 50,
+    borderWidth: 1,
+    borderColor: colors.mediumGray,
+    borderRadius: 10,
+    padding: 10,
+    marginVertical: 15
+  },
+
+  textArea: {
+    width: '100%',
+    // height: 200,
+    borderWidth: 1,
+    borderColor: colors.mediumGray,
+    borderRadius: 10,
+    padding: 10,
+    marginVertical: 15
   }
 })
 
