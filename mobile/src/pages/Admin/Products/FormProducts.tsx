@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import { ActivityIndicator, Alert, Image, Modal, ScrollView, Text, TextInput, TouchableOpacity, View } from 'react-native'
+import Toast from 'react-native-tiny-toast'
 
-import { getCategories } from '../../../services'
+import { createProduct, getCategories } from '../../../services'
 
 import { text, theme } from '../../../styles'
 import arrow from '../../../assets/leftArrow.png'
@@ -29,10 +30,20 @@ const FormProduct: React.FC<FormProductProps> = (props) => {
   }
 
   async function newProduct() {
+    setIsLoading(true)
+
     const category = replaceCategory()
     const data = { ...product, categories: [{ id: category }] }
 
-    console.warn(data)
+    try {
+      await createProduct(data)
+      Toast.showSuccess('Produto criado com sucesso!')
+    }
+    catch (error) {
+      Toast.show('Erro ao salvar...')
+    }
+
+    setIsLoading(false)
   }
 
   function replaceCategory() {
