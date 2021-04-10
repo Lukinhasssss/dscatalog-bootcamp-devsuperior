@@ -14,3 +14,8 @@ export function getProducts() {
 
   return result
 }
+
+export function getCategories() {
+  const result = api.get('/categories?direction=ASC&orderBy=name')
+  return result
+}
