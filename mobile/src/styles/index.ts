@@ -106,6 +106,26 @@ const text = StyleSheet.create({
     fontWeight: 'bold',
     textTransform: 'uppercase',
     color: colors.primary
+  },
+
+  uploadButtonText: {
+    color: colors.white,
+    textTransform: 'uppercase',
+    fontWeight: 'bold'
+  },
+
+  fileSize: {
+    color: colors.primary,
+    fontSize: 10,
+    fontWeight: '300',
+    padding: 2,
+    marginVertical: 5
+  },
+
+  saveButtonText: {
+    fontWeight: 'bold',
+    textTransform: 'uppercase',
+    color: colors.primary
   }
 })
 
@@ -426,6 +446,36 @@ const theme = StyleSheet.create({
     borderRadius: 10,
     padding: 10,
     marginVertical: 15
+  },
+
+  selectInput: {
+    width: '100%',
+    height: 50,
+    borderWidth: 1,
+    borderColor: colors.mediumGray,
+    borderRadius: 10,
+    padding: 10,
+    justifyContent: 'center'
+  },
+
+  uploadButton: {
+    width: '100%',
+    height: 40,
+    backgroundColor: colors.mediumGray,
+    borderRadius: 10,
+    alignItems: 'center',
+    justifyContent: 'center'
+  },
+
+  saveButton: {
+    width: '46%',
+    height: 40,
+    borderWidth: 1,
+    borderColor: colors.primary,
+    borderRadius: 10,
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginVertical: 10
   }
 })
 

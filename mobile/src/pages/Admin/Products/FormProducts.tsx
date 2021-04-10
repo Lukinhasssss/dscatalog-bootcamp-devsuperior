@@ -72,24 +72,27 @@ const FormProduct: React.FC<FormProductProps> = (props) => {
             </TouchableOpacity>
 
             <TextInput placeholder="Nome do produto" style={ theme.formInput } />
-            <TouchableOpacity onPress={ () => setShowCategories(!showCategories) }>
-              <Text>
+            <TouchableOpacity
+              onPress={ () => setShowCategories(!showCategories) }
+              style={ theme.selectInput }
+            >
+              <Text style={ product.categories === null && { color: '#cecece' } }>
                 { product.categories === null ? 'Escolha uma categoria' : product.categories }
               </Text>
             </TouchableOpacity>
             <TextInput placeholder="Preço" style={ theme.formInput } />
-            <TouchableOpacity>
-              <Text>Carregar imagem</Text>
+            <TouchableOpacity activeOpacity={ 0.7 } style={ theme.uploadButton }>
+              <Text style={ text.uploadButtonText }>Carregar imagem</Text>
             </TouchableOpacity>
-            <Text>As imagens devem ser JPG ou PNG e não devem ultrapassar 5 mb</Text>
+            <Text style={ text.fileSize }>As imagens devem ser JPG ou PNG e não devem ultrapassar 5 mb</Text>
             <TextInput multiline placeholder="Descrição" style={ theme.textArea } />
-            <View>
-              <TouchableOpacity>
-                <Text>Cancelar</Text>
+            <View style={ theme.buttonContainer }>
+              <TouchableOpacity style={ theme.deleteButton }>
+                <Text style={ text.deleteButtonText }>Cancelar</Text>
               </TouchableOpacity>
 
-              <TouchableOpacity>
-                <Text>Salvar</Text>
+              <TouchableOpacity style={ theme.saveButton }>
+                <Text style={ text.saveButtonText }>Salvar</Text>
               </TouchableOpacity>
             </View>
           </ScrollView>
