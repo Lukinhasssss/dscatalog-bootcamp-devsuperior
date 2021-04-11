@@ -58,9 +58,17 @@ const Products: React.FC<ProductProps> = (props) => {
       {isLoading ? (
         <ActivityIndicator size="large" />
       ) :
-      data.map((product) => (
-        <ProductCard key={product.id} {...product} role="admin" handleOnDelete={ handleOnDelete } />
-      ))}
+      data.map((product) => {
+        const { id } = product
+        return (
+          <ProductCard
+            { ...product }
+            key={ id }
+            role="admin"
+            handleOnDelete={ handleOnDelete }
+          />
+        )
+      })}
     </ScrollView>
   )
 }

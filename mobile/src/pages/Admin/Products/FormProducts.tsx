@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { ActivityIndicator, Alert, Image, Modal, ScrollView, Text, TextInput, TouchableOpacity, View } from 'react-native'
 import Toast from 'react-native-tiny-toast'
+import { TextInputMask } from 'react-native-masked-text'
 
 import { createProduct, getCategories } from '../../../services'
 
@@ -21,7 +22,7 @@ const FormProduct: React.FC<FormProductProps> = (props) => {
     name: '',
     description: '',
     imgUrl: '',
-    price: 0,
+    price: '',
     categories: []
   })
 
@@ -33,7 +34,7 @@ const FormProduct: React.FC<FormProductProps> = (props) => {
     setIsLoading(true)
 
     const category = replaceCategory()
-    const data = { ...product, categories: [{ id: category }] }
+    const data = { ...product, price: getRaw(), categories: [{ id: category }] }
 
     try {
       await createProduct(data)
@@ -58,6 +59,13 @@ const FormProduct: React.FC<FormProductProps> = (props) => {
     setCategories(result.data.content)
 
     setIsLoading(false)
+  }
+
+  function getRaw() {
+    const str = product.price
+    const result = str.slice(2).replace(/\./g, '').replace(/,/g, '.')
+
+    return result
   }
 
   useEffect(() => {
@@ -114,12 +122,19 @@ const FormProduct: React.FC<FormProductProps> = (props) => {
                 { product.categories.length === 0 ? 'Escolha uma categoria' : product.categories }
               </Text>
             </TouchableOpacity>
-            <TextInput
+            <TextInputMask
+              type={ 'money' }
+              placeholder="Preço"
+              value={ product.price }
+              style={ theme.formInput }
+              onChangeText={ (event) => setProduct({ ...product, price: event }) }
+            />
+            {/* <TextInput
               placeholder="Preço"
               style={ theme.formInput }
               value={ product.price }
               onChangeText={ (event) => setProduct({ ...product, price: parseInt(event) }) }
-            />
+            /> */}
             <TouchableOpacity activeOpacity={ 0.7 } style={ theme.uploadButton }>
               <Text style={ text.uploadButtonText }>Carregar imagem</Text>
             </TouchableOpacity>
