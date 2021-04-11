@@ -64,3 +64,18 @@ export async function uploadImage(image: string) {
 
   return response
 }
+
+export async function getProduct(id: number) {
+  const response = api.get(`/products/${id}`)
+  return response
+}
+
+export async function updateProduct(data: object) {
+  const authToken = await userToken()
+  const response = api.put(`/products/${data.id}`, data, {
+    headers: {
+      Authorization: `Bearer ${authToken}`
+    }
+  })
+  return response
+}

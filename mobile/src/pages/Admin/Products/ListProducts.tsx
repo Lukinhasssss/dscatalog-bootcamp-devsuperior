@@ -7,13 +7,14 @@ import { admin, text } from '../../../styles'
 
 interface ProductProps {
   setScreen: Function
+  setProductId: Function
 }
 
 const Products: React.FC<ProductProps> = (props) => {
   const [search, setSearch] = useState('')
   const [products, setProducts] = useState([])
   const [isLoading, setIsLoading] = useState(false)
-  const { setScreen } = props
+  const { setScreen, setProductId } = props
 
   async function handleOnDelete(id: number) {
     setIsLoading(true)
@@ -22,6 +23,11 @@ const Products: React.FC<ProductProps> = (props) => {
     loadProducts()
 
     setIsLoading(false)
+  }
+
+  function handleOnEdit(id: number) {
+    setProductId(id)
+    setScreen('editProduct')
   }
 
   async function loadProducts() {
@@ -66,6 +72,7 @@ const Products: React.FC<ProductProps> = (props) => {
             key={ id }
             role="admin"
             handleOnDelete={ handleOnDelete }
+            handleOnEdit={ handleOnEdit }
           />
         )
       })}

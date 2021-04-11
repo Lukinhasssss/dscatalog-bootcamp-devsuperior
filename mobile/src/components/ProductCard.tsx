@@ -12,9 +12,10 @@ interface ProductProps {
   price: string
   role?: string
   handleOnDelete: Function
+  handleOnEdit: Function
 }
 
-const ProductCard: React.FC<ProductProps> = ({ id, name, imgUrl, price, role, handleOnDelete }) => {
+const ProductCard: React.FC<ProductProps> = ({ id, name, imgUrl, price, role, handleOnDelete, handleOnEdit }) => {
   const navigation = useNavigation()
 
   return (
@@ -50,7 +51,7 @@ const ProductCard: React.FC<ProductProps> = ({ id, name, imgUrl, price, role, ha
               <Text style={ text.deleteButtonText }>Excluir</Text>
             </TouchableOpacity>
 
-            <TouchableOpacity style={ theme.editButton }>
+            <TouchableOpacity style={ theme.editButton } onPress={ () => handleOnEdit(id) }>
               <Text style={ text.editButtonText }>Editar</Text>
             </TouchableOpacity>
           </View>
