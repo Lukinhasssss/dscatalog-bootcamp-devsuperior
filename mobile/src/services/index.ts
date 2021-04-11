@@ -45,3 +45,22 @@ export function getCategories() {
   const result = api.get('/categories?direction=ASC&orderBy=name')
   return result
 }
+
+export async function uploadImage(image: string) {
+  if (!image) return
+  const authToken = await userToken()
+  let data = new FormData()
+  data.append('file', {
+    uri: image,
+    name: image
+  })
+
+  const response = await api.post('/products/image', data, {
+    headers: {
+      Authorization: `Bearer ${authToken}`,
+      'Content-Type': 'multipart/form-data'
+    }
+  })
+
+  return response
+}
