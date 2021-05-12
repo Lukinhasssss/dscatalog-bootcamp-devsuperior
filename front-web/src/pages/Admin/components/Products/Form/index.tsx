@@ -92,6 +92,7 @@ const Form = () => {
                   minLength: { value: 5, message: 'O campo deve ter no mínimo 5 caracteres' },
                   maxLength: { value: 60, message: 'O campo deve ter no máximo 60 caracteres' }
                 })}
+                data-testid="name"
               />
               {errors.name && (
                 <div className="invalid-feedback d-block">
@@ -100,6 +101,7 @@ const Form = () => {
               )}
             </div>
             <div className="margin-bottom-30">
+              <label htmlFor="categories" className="d-none">Categorias</label>
               <Controller
                 as={ Select }
                 name="categories"
@@ -113,6 +115,7 @@ const Form = () => {
                 rules={{ required: true }}
                 defaultValue=""
                 isMulti
+                inputId="categories"
               />
               {errors.categories && (
                 <div className="invalid-feedback d-block">
@@ -143,6 +146,7 @@ const Form = () => {
               ref={ register({ required: "Campo obrigatório" }) }
               cols={30}
               rows={10}
+              data-testid="description"
             />
             {errors.description && (
                 <div className="invalid-feedback d-block">

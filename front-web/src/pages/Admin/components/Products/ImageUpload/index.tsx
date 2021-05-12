@@ -63,6 +63,7 @@ const ImageUpload = ({ onUploadSuccess, productImgUrl }: Props) => {
             accept="image/png, image/jpg"
             onChange={ handleChange }
             hidden
+            data-testid="imgUrl"
           />
           <label htmlFor="upload">ADICIONAR IMAGEM</label>
         </div>
