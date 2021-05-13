@@ -10,22 +10,12 @@ import history from 'core/utils/history'
 import Form from '../Form'
 import { categoriesResponse } from './fixtures'
 
-// jest.mock('react-router-dom', () => ({
-//   ...jest.requireActual('react-router-dom'),
-//   useParams: () => ({
-//     productId: 'create'
-//   })
-// }))
-
-jest.mock('react-router-dom', () => {
-  const originalModule = jest.requireActual('react-router-dom')
-
-  return {
-    __esModule: true,
-    ...originalModule,
-    productId: jest.fn().mockReturnValue('create')
-  }
-})
+jest.mock('react-router', () => ({
+  ...jest.requireActual('react-router'),
+  useParams: () => ({
+    productId: 'create'
+  })
+}))
 
 const server = setupServer(
   rest.get('http://localhost:8080/categories', (req, res, ctx) => {
@@ -68,4 +58,30 @@ test('should render Form', async () => {
   await waitFor(() => expect(screen.getByText('Produto cadastrado com sucesso!')).toBeInTheDocument())
   expect(history.location.pathname).toBe('/admin/products')
   expect(screen.getByText(/Cadastrar um produto/i)).toBeInTheDocument()
+})
+
+test('should show validation error messages', async () => {
+  render(
+    <Router history={ history }>
+      <Form />
+    </Router>
+  )
+
+  const submitButton = screen.getByRole('button', { name: /salvar/i })
+  userEvent.click(submitButton)
+
+  await waitFor(() => expect(screen.getAllByText('Campo obrigatório')).toHaveLength(4))
+
+  const nameInput = screen.getByTestId('name')
+  const priceInput = screen.getByTestId('price')
+  const imgUrlInput = screen.getByTestId('imgUrl')
+  const descriptionInput = screen.getByTestId('description')
+  const categoriesInput = screen.getByLabelText('Categorias')
+
+  userEvent.type(nameInput, 'Computador')
+  userEvent.type(priceInput, '1200')
+  userEvent.type(imgUrlInput, 'image.jpg')
+  userEvent.type(descriptionInput, 'Ótimo computador')
+  await selectEvent.select(categoriesInput, ['Computadores', 'Eletrônicos'])
+  await waitFor(() => expect(screen.queryAllByText('Campo obrigatório')).toHaveLength(0))
 })
